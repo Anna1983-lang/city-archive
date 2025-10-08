@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-
 {% block content %}
 <h1>Регистрация</h1>
 
@@ -10,6 +9,15 @@
     <label>Пароль:</label><br>
     <input type="password" name="password" required><br><br>
 
+    {% if session.username == "admin" %}
+    <label>Роль:</label><br>
+    <select name="role" required>
+        <option value="user">Пользователь</option>
+        <option value="admin">Администратор</option>
+        <option value="editor">Редактор</option>
+    </select><br><br>
+    {% endif %}
+
     <input type="submit" value="Зарегистрироваться" style="background-color:#0077cc; color:white; border:none; padding:8px 16px; border-radius:5px; cursor:pointer;">
 </form>
 
@@ -17,4 +25,9 @@
     Уже есть учётная запись?
     <a href="/login" style="color:#0077cc; text-decoration:none; font-weight:bold;">Войдите здесь</a>.
 </p>
+
+{% if message %}
+<p style="color:red;">{{ message }}</p>
+{% endif %}
+
 {% endblock %}
