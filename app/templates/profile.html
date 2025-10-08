@@ -4,16 +4,22 @@
 <p>Это ваш личный кабинет. Здесь будут отображаться ваши действия или сообщения.</p>
 
 {% if username == "admin" %}
-  <h2>Входящие сообщения:</h2>
-  {% if messages %}
+    <p>
+        <a href="/register" style="background-color:#0077cc; color:white; padding:8px 16px; border-radius:5px; text-decoration:none;">
+            Добавить пользователя
+        </a>
+    </p>
+
+    <h2>Входящие сообщения:</h2>
+    {% if messages %}
     <ul>
-      {% for msg in messages %}
-        <li><strong>{{ msg.name }}</strong> ({{ msg.email }}): {{ msg.message }}</li>
-      {% endfor %}
+        {% for msg in messages %}
+            <li><strong>{{ msg.name }}</strong> ({{ msg.email }}): {{ msg.message }}</li>
+        {% endfor %}
     </ul>
-  {% else %}
-    <p>Нет новых сообщений.</p>
-  {% endif %}
+    {% else %}
+        <p>Нет новых сообщений.</p>
+    {% endif %}
 {% endif %}
 
 <p><a href="/logout">Выйти</a></p>
