@@ -19,7 +19,7 @@
     </script>
 </head>
 <body>
-    <nav>
+    <nav style="display:flex; align-items:center; flex-wrap:wrap; gap:15px;">
         <a href="/">Главная</a>
         <a href="/about">О проекте</a>
         <a href="/archive">Архив</a>
@@ -27,8 +27,17 @@
         <a href="/contacts">Контакты</a>
         <a href="/sitemap">Карта сайта</a>
         <a href="/contact">Связаться</a>
+
+        <!-- 🔎 Форма поиска -->
+        <form action="/search" method="get" style="display:inline-block;">
+            <input type="text" name="q" placeholder="Поиск..." required style="padding:3px;">
+            <button type="submit" style="padding:3px 6px;">🔍</button>
+        </form>
+
+        <!-- ♿ Кнопка версии для слабовидящих -->
         <button onclick="switchStyle()">Версия для слабовидящих</button>
 
+        <!-- 👤 Кабинет / вход -->
         {% if session.get('username') %}
             <a href="/profile">Кабинет ({{ session['username'] }})</a>
         {% else %}
