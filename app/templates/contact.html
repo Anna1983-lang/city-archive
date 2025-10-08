@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Связаться с нами</h1>
+<form method="post">
+  <label>Имя:</label><br>
+  <input type="text" name="name" required><br>
+  <label>Email:</label><br>
+  <input type="email" name="email" required><br>
+  <label>Сообщение:</label><br>
+  <textarea name="message" rows="5" required></textarea><br><br>
+  <button type="submit">Отправить</button>
+</form>
+
+{% if success %}
+<p style="color: green;">Сообщение успешно отправлено!</p>
+{% endif %}
+{% endblock %}

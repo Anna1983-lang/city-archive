@@ -1,0 +1,33 @@
+body {
+    background-color: black;
+    color: yellow;
+    font-size: 1.5em;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+nav {
+    background-color: black;
+    margin-bottom: 20px;
+}
+
+nav a {
+    color: yellow;
+    font-size: 1.2em;
+    margin-right: 20px;
+    text-decoration: underline;
+}
+
+button {
+    background-color: yellow;
+    color: black;
+    font-weight: bold;
+    font-size: 1.1em;
+    padding: 10px;
+    border: none;
+}
+
+main {
+    max-width: 900px;
+    margin: auto;
+}

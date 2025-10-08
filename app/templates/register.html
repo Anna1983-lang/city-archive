@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Регистрация</h1>
+
+<form method="POST">
+    <label>Логин:</label><br>
+    <input type="text" name="username" required><br><br>
+
+    <label>Пароль:</label><br>
+    <input type="password" name="password" required><br><br>
+
+    <input type="submit" value="Зарегистрироваться" style="background-color:#0077cc; color:white; border:none; padding:8px 16px; border-radius:5px; cursor:pointer;">
+</form>
+
+<p style="margin-top:20px;">
+    Уже есть учётная запись?
+    <a href="/login" style="color:#0077cc; text-decoration:none; font-weight:bold;">Войдите здесь</a>.
+</p>
+{% endblock %}
