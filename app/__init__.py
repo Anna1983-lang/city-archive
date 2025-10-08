@@ -67,22 +67,30 @@ def register():
         username = request.form["username"]
         password = request.form["password"]
 
+        role = "user"  # по умолчанию
+        if "username" in session and session["username"] == "admin":
+            role = request.form.get("role", "user")
+
+        # Загрузка пользователей
         if os.path.exists("users.json"):
             with open("users.json", "r", encoding="utf-8") as f:
                 users = json.load(f)
         else:
             users = {}
 
+        # Проверка, существует ли пользователь
         if username in users:
-            return "Пользователь уже существует"
-        users[username] = password
+            return render_template("register.html", message="Пользователь уже существует!")
+
+        # Сохранение нового пользователя с ролью
+        users[username] = {"password": password, "role": role}
 
         with open("users.json", "w", encoding="utf-8") as f:
-            json.dump(users, f)
+            json.dump(users, f, ensure_ascii=False, indent=2)
 
         return redirect("/login")
-    return render_template("register.html")
 
+    return render_template("register.html")
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
