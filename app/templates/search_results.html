@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Результаты поиска по запросу: "{{ query }}"</h1>
+
+{% if results %}
+    <ul>
+    {% for result in results %}
+        <li>
+            <strong>{{ result.title }}</strong><br>
+            <p>{{ result.content }}</p>
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>Ничего не найдено.</p>
+{% endif %}
+
+<p><a href="/">Вернуться на главную</a></p>
+{% endblock %}
