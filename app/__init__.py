@@ -128,4 +128,27 @@ def logout():
 @app.route("/contacts")
 def contacts():
     return render_template("contacts.html")
+@app.route("/search")
+def search():
+    query = request.args.get("q", "").strip().lower()
+    if not query:
+        return redirect("/")
+
+    # Примерные данные — замени на свои данные из БД или файлов
+    archives = [
+        {"title": "Решения городской думы", "content": "Протоколы заседаний, нормативные акты."},
+        {"title": "Исторические документы", "content": "Скан-копии архивных данных."},
+    ]
+    news = [
+        {"title": "Открытие нового зала", "content": "В архиве открыт новый читальный зал."},
+        {"title": "Выставка архивных документов", "content": "Приглашаем на выставку."},
+    ]
+
+    # Поиск по заголовку и содержимому
+    results = []
+    for item in archives + news:
+        if query in item["title"].lower() or query in item["content"].lower():
+            results.append(item)
+
+    return render_template("search_results.html", query=query, results=results)
 
