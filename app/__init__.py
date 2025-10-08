@@ -66,31 +66,27 @@ def register():
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
+        by_admin = 'by_admin' in request.form
 
-        role = "user"  # по умолчанию
-        if "username" in session and session["username"] == "admin":
-            role = request.form.get("role", "user")
+        with open("users.json", "r", encoding="utf-8") as f:
+            users = json.load(f)
 
-        # Загрузка пользователей
-        if os.path.exists("users.json"):
-            with open("users.json", "r", encoding="utf-8") as f:
-                users = json.load(f)
-        else:
-            users = {}
-
-        # Проверка, существует ли пользователь
         if username in users:
-            return render_template("register.html", message="Пользователь уже существует!")
+            return "Пользователь уже существует", 400
 
-        # Сохранение нового пользователя с ролью
-        users[username] = {"password": password, "role": role}
+        users[username] = {"password": password}
 
         with open("users.json", "w", encoding="utf-8") as f:
-            json.dump(users, f, ensure_ascii=False, indent=2)
+            json.dump(users, f, ensure_ascii=False, indent=4)
 
-        return redirect("/login")
+        if by_admin and session.get('username') == 'admin':
+            return redirect("/dashboard")  # просто вернуться в кабинет админа
+        else:
+            session["username"] = username
+            return redirect("/dashboard")
 
     return render_template("register.html")
+
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
